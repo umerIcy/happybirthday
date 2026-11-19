@@ -1,0 +1,789 @@
+/* Lavender scrapbook journey. Palette tokens live on :root in index.css. */
+
+.journey {
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: clip;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 84% 5%, rgba(255, 246, 214, 0.9), transparent 18%),
+    radial-gradient(circle at 12% 8%, rgba(215, 196, 245, 0.55), transparent 32%),
+    radial-gradient(circle at 90% 0%, rgba(246, 213, 226, 0.5), transparent 28%),
+    radial-gradient(circle at 18% 14%, #fff 0 1.4px, transparent 2px),
+    radial-gradient(circle at 72% 20%, #fff8dc 0 1.5px, transparent 2.2px),
+    radial-gradient(circle at 92% 36%, #fff 0 1px, transparent 1.8px),
+    linear-gradient(180deg, var(--color-bg-lavender) 0%, var(--color-bg) 52%, #fbf7f1 100%);
+}
+
+.journey-screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 76px 20px 16px;
+  animation: journey-in 0.45s ease;
+}
+
+.journey-screen.is-welcome {
+  padding-top: 36px;
+}
+
+.journey-screen > section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.journey-back {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 20;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 252, 248, 0.88);
+  color: var(--color-text);
+  box-shadow: 0 6px 16px rgba(74, 53, 96, 0.12);
+  font: 600 0.95rem/1 Inter, system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.journey-back:focus-visible,
+.journey-button:focus-visible,
+.tulip-button:focus-visible,
+.candle-hit:focus-visible {
+  outline: 3px solid var(--color-primary-deep);
+  outline-offset: 3px;
+}
+
+.screen-copy,
+.welcome-copy {
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font: 600 0.78rem/1.2 Inter, system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+
+.screen-copy h1,
+.welcome-copy h1 {
+  margin: 0;
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: clamp(2.35rem, 8vw, 4.4rem);
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+.screen-copy p,
+.welcome-message,
+.welcome-date,
+.note-placeholder,
+.closing-line {
+  margin: 10px auto 0;
+  max-width: 34rem;
+  font: 400 1.02rem/1.55 Inter, system-ui, sans-serif;
+  color: var(--color-text-soft);
+}
+
+.welcome-date {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.6rem;
+  color: var(--color-primary-deep);
+}
+
+.journey-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 18px;
+}
+
+.welcome .journey-actions {
+  margin-top: 22px;
+}
+
+.journey-button {
+  appearance: none;
+  min-height: 52px;
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #d2bef3 0%, #a888d8 100%);
+  color: #fff;
+  font: 700 1.05rem/1 Inter, system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 20px rgba(125, 94, 168, 0.28);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.journey-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 24px rgba(125, 94, 168, 0.32);
+}
+
+.journey-button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.journey-button:disabled {
+  cursor: default;
+  filter: grayscale(0.15);
+  opacity: 0.45;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Welcome decorations */
+
+.welcome {
+  position: relative;
+}
+
+.welcome-sky {
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  height: 28px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 18px 8px 0 6px rgba(255, 255, 255, 0.75), -16px 10px 0 4px rgba(255, 255, 255, 0.7);
+}
+
+.cloud-a { width: 74px; top: 8px; left: 6%; }
+.cloud-b { width: 58px; top: 46px; right: 8%; }
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--color-yellow);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  animation: float-sparkle 4.8s ease-in-out infinite;
+}
+
+.sparkle-a { top: 18px; right: 22%; }
+.sparkle-b { top: 90px; left: 12%; animation-delay: 0.8s; background: var(--color-pink); }
+.sparkle-c { top: 64px; right: 14%; width: 7px; height: 7px; animation-delay: 1.4s; }
+.sparkle-d { top: 28px; left: 18%; width: 6px; height: 6px; animation-delay: 1.1s; background: #fff; }
+
+.welcome-moon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.moon-button {
+  width: 86px;
+  height: 86px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.moon-button:focus-visible {
+  outline: 3px solid var(--color-primary-deep);
+  outline-offset: 3px;
+}
+
+.moon-button:hover .crescent-moon,
+.moon-button:focus-visible .crescent-moon,
+.moon-button.is-open .crescent-moon {
+  transform: scale(1.05);
+}
+
+.moon-label {
+  margin: -4px 0 0;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--color-primary-deep);
+}
+
+.moon-hint {
+  margin: 2px 0 0;
+  font: 500 0.86rem/1.3 Inter, system-ui, sans-serif;
+  color: var(--color-text-soft);
+}
+
+.moon-note-slot {
+  min-height: 0;
+}
+
+.moon-note-slot:not(:empty) {
+  min-height: 88px;
+  margin-top: 8px;
+}
+
+.screen-moon {
+  width: 58px;
+  margin: 0 auto 2px;
+  pointer-events: none;
+}
+
+.letter-moon {
+  width: 44px;
+  margin-bottom: 8px;
+}
+
+.cover-moon {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  z-index: 4;
+  width: 38px;
+  pointer-events: none;
+}
+
+.welcome-tulips {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  height: 150px;
+  margin-top: 8px;
+}
+
+.welcome-tulips .tulip-art {
+  width: 92px;
+  height: 150px;
+}
+
+.welcome-tulip-small {
+  width: 72px !important;
+  margin-top: 18px;
+}
+
+.mini-cake {
+  position: relative;
+  width: 74px;
+  height: 58px;
+  margin: 22px auto 0;
+}
+
+.mini-cake-body,
+.mini-cake-top,
+.mini-cake-candle,
+.mini-cake-flame {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mini-cake-body {
+  bottom: 0;
+  width: 70px;
+  height: 28px;
+  border-radius: 8px 8px 16px 16px;
+  background: #fff6ea;
+  box-shadow: inset 0 -8px 0 #e7c58a;
+}
+
+.mini-cake-top {
+  bottom: 22px;
+  width: 62px;
+  height: 14px;
+  border-radius: 40px;
+  background: #d9c2f2;
+}
+
+.mini-cake-candle {
+  bottom: 34px;
+  width: 6px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--color-pink);
+}
+
+.mini-cake-flame {
+  bottom: 48px;
+  width: 8px;
+  height: 12px;
+  border-radius: 50% 50% 50% 50%;
+  background: var(--color-yellow);
+  animation: candle-flicker 0.9s ease-in-out infinite;
+}
+
+/* Tulips */
+
+.tulip-art {
+  --petal: #c9a8ee;
+  --petal-deep: #8d64c4;
+  --leaf: #b7d7ae;
+  --leaf-deep: #6ea36a;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--leaf-deep);
+}
+
+.tulip-art[data-palette="pink"] {
+  --petal: #f3c4d4;
+  --petal-deep: #e08aaa;
+}
+
+.tulip-art[data-palette="lilac"] {
+  --petal: #e3d4f8;
+  --petal-deep: #b497e0;
+}
+
+.tulip-sway {
+  transform-box: view-box;
+  transform-origin: 60px 200px;
+  animation: tulip-sway 3.6s ease-in-out infinite;
+  animation-delay: var(--sway-delay, 0s);
+}
+
+.tulip-stem {
+  stroke: var(--leaf-deep);
+}
+
+.tulip-leaf { fill: var(--leaf); }
+.tulip-leaf-right { fill: var(--leaf-deep); }
+
+.tulip-bud,
+.tulip-petal-side {
+  fill: var(--petal);
+}
+
+.tulip-petal-middle { fill: var(--petal-deep); }
+.tulip-petal-shine { fill: rgba(255, 255, 255, 0.55); }
+
+.tulip-bud,
+.tulip-petals {
+  transform-box: view-box;
+  transform-origin: 60px 118px;
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tulip-art.is-bloomed .tulip-bud {
+  opacity: 0;
+  transform: scale(0.86);
+}
+
+.tulip-art:not(.is-bloomed) .tulip-petals {
+  opacity: 0;
+  transform: scale(0.72);
+}
+
+.tulip-art.is-bloomed .tulip-petals {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tulip-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(4px, 2vw, 18px);
+  margin-top: 12px;
+}
+
+.tulip-button {
+  width: clamp(96px, 30vw, 140px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tulip-button.is-active .tulip-art {
+  filter: drop-shadow(0 10px 0 rgba(255, 252, 248, 0.0)) drop-shadow(0 8px 12px rgba(125, 94, 168, 0.25));
+}
+
+.note-slot {
+  min-height: 112px;
+  margin-top: 8px;
+}
+
+.note-card {
+  margin: 0 auto;
+  max-width: 420px;
+  padding: 16px 18px 14px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.96), rgba(255, 248, 238, 0.96));
+  box-shadow: 0 10px 24px rgba(74, 53, 96, 0.1);
+  animation: note-pop 0.35s ease;
+}
+
+.note-card p {
+  margin: 0;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(1.35rem, 4.5vw, 1.7rem);
+  line-height: 1.35;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.note-placeholder {
+  text-align: center;
+}
+
+/* Cheesecake */
+
+.cheesecake {
+  position: relative;
+  width: min(320px, 86vw);
+  margin: 8px auto 0;
+}
+
+.cheesecake-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.flame {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: flame-flicker 0.85s ease-in-out infinite;
+}
+
+.cheesecake.is-out .flame {
+  animation: blow-out 0.4s ease forwards;
+}
+
+.smoke {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: 40px;
+  height: 40px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.smoke span {
+  position: absolute;
+  left: 8px;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(196, 188, 206, 0.0);
+}
+
+.cheesecake.is-out .smoke span {
+  animation: smoke-puff 1.35s ease-out forwards;
+}
+
+.cheesecake.is-out .smoke span:nth-child(2) {
+  left: 16px;
+  animation-delay: 0.12s;
+}
+
+.cheesecake.is-out .smoke span:nth-child(3) {
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  animation-delay: 0.22s;
+}
+
+.candle-hit {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  width: 64px;
+  height: 96px;
+  transform: translateX(-50%);
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.candle-hit:disabled {
+  cursor: default;
+}
+
+.burst {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  opacity: 0;
+}
+
+.cheesecake.is-out .burst {
+  animation: burst 0.9s ease-out forwards;
+}
+
+.burst-1 { top: 18%; left: 18%; background: var(--color-pink); }
+.burst-2 { top: 10%; left: 46%; }
+.burst-3 { top: 20%; right: 16%; background: var(--color-lilac); }
+.burst-4 { top: 36%; left: 8%; background: var(--color-green); }
+.burst-5 { top: 34%; right: 8%; background: var(--color-pink); }
+.burst-6 { top: 8%; left: 30%; width: 6px; height: 6px; }
+.burst-7 { top: 12%; right: 28%; background: #fff; }
+.burst-8 { top: 42%; left: 22%; background: var(--color-primary); }
+
+/* Letter */
+
+.letter-stage .small-rajib-letter {
+  margin-top: 4px;
+  opacity: 1;
+  transform: none;
+  animation: note-pop 0.45s ease;
+  --envelope-w: 176px;
+  --envelope-h: 114px;
+  --paper-closed-w: 120px;
+  --paper-closed-h: 8px;
+  --paper-closed-bottom: 78px;
+  --paper-open-h: min(220px, 36dvh);
+  --paper-open-bottom: 96px;
+}
+
+.boxMail.boxMail--lavender.hidden {
+  display: none;
+}
+
+.letter-stage .small-rajib-paper-content {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.letter-stage .small-rajib-greeting,
+.letter-stage .small-rajib-signature,
+.letter-stage .small-rajib-closing {
+  font-family: "Dancing Script", cursive;
+}
+
+.letter-end {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.letter-tulips {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4px;
+  height: 72px;
+}
+
+.letter-tulips .tulip-art {
+  width: 48px;
+}
+
+.closing-line {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.7rem;
+  color: var(--color-primary-deep);
+}
+
+/* Lavender notebook + envelope, layered over the template styles */
+
+.boxMail--lavender {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 252, 248, 0.2), transparent 46%),
+    linear-gradient(160deg, #efe4fb 0%, #e7d8f6 50%, #f7efe6 100%);
+}
+
+.boxMail--lavender .boxMail-container:hover {
+  filter: drop-shadow(0 0 12px rgba(169, 136, 216, 0.45));
+}
+
+.boxMail--lavender .card1 {
+  color: var(--color-text);
+  background:
+    radial-gradient(ellipse at 20% 18%, rgba(255, 255, 255, 0.55), transparent 42%),
+    linear-gradient(145deg, #f3e8ff 0%, #dcc8f6 52%, #cbb4ee 100%) !important;
+  border-color: #c3a6e4 !important;
+}
+
+.boxMail--lavender .card1::after {
+  background: linear-gradient(135deg, #e7d8f8 0%, #f6efff 100%);
+}
+
+.boxMail--lavender .notebook-spine {
+  background: linear-gradient(90deg, #8d6bb8, #cbb4ee 40%, #e4d4f8 75%, #a888d8);
+}
+
+.boxMail--lavender .crossAll,
+.boxMail--lavender .crossAll svg {
+  color: #4a3560;
+}
+
+.boxMail--lavender .cover-eyebrow {
+  display: none;
+}
+
+.boxMail--lavender .username,
+.boxMail--lavender .cover-title,
+.boxMail--lavender .cover-subtitle,
+.boxMail--lavender .notebook-label {
+  color: #5c3d78;
+}
+
+.boxMail--lavender .cover-title {
+  text-shadow: 2px 3px 0 rgba(255, 255, 255, 0.55);
+}
+
+.boxMail--lavender .card2 h3,
+.boxMail--lavender .signature {
+  color: #5c3d78;
+}
+
+.boxMail--lavender .card2 h3 {
+  border-bottom-color: rgba(125, 94, 168, 0.28);
+}
+
+.boxMail--lavender .card2-message-text {
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--color-text);
+}
+
+.boxMail.boxMail--lavender .boxMail-container .card1 .userImg img {
+  object-fit: contain;
+  background: #fffaf6;
+}
+
+.small-rajib-letter--lavender .small-rajib-paper {
+  background-image:
+    linear-gradient(90deg, transparent 0 22px, rgba(141, 100, 196, 0.28) 22px 23px, transparent 23px),
+    repeating-linear-gradient(180deg, transparent 0 1.5rem, rgba(110, 86, 134, 0.16) 1.5rem calc(1.5rem + 1px));
+}
+
+.boxMail--lavender .corner-ribbon.top-left svg {
+  display: none;
+}
+
+.small-rajib-letter--lavender .small-rajib-envelope-body {
+  background: linear-gradient(158deg, #e5d4f8 0%, #c9b0ee 55%, #b497dc 100%);
+}
+
+.small-rajib-letter--lavender .small-rajib-flap {
+  border-top-color: #d7c4f4;
+}
+
+.small-rajib-letter--lavender .small-rajib-wax {
+  background: radial-gradient(circle at 35% 28%, #c9b0ee 0%, #8d64c4 55%, #5c3d78 100%);
+  color: #fff8ff;
+}
+
+.small-rajib-letter--lavender .small-rajib-address {
+  color: #fffafc;
+  text-shadow: 0 1px 1px rgba(74, 53, 96, 0.35);
+}
+
+.small-rajib-letter--lavender .small-rajib-signature,
+.small-rajib-letter--lavender .small-rajib-paper-close {
+  color: #5c3d78;
+}
+
+@keyframes journey-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes tulip-sway {
+  0%, 100% { transform: rotate(-2.4deg); }
+  50% { transform: rotate(2.4deg); }
+}
+
+@keyframes float-sparkle {
+  0%, 100% { transform: translateY(0); opacity: 0.75; }
+  50% { transform: translateY(-8px); opacity: 1; }
+}
+
+@keyframes candle-flicker {
+  0%, 100% { transform: translateX(-50%) scale(1) rotate(-3deg); }
+  50% { transform: translateX(-50%) scale(0.9, 1.08) rotate(3deg); }
+}
+
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50% { transform: scale(0.92, 1.08) rotate(3deg); }
+}
+
+@keyframes blow-out {
+  to { opacity: 0; transform: scale(1.5, 0.2) translateY(6px); }
+}
+
+@keyframes smoke-puff {
+  0% { opacity: 0; background: rgba(210, 204, 216, 0.2); transform: translateY(6px) scale(0.4); }
+  30% { opacity: 0.75; background: rgba(220, 214, 226, 0.75); }
+  100% { opacity: 0; transform: translateY(-42px) scale(1.5); }
+}
+
+@keyframes burst {
+  0% { opacity: 0; transform: scale(0.4); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-16px) scale(1.2); }
+}
+
+@keyframes note-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 390px) {
+  .journey-screen {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .welcome-tulips {
+    height: 128px;
+  }
+
+  .welcome-tulips .tulip-art {
+    width: 78px;
+    height: 128px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-screen,
+  .tulip-sway,
+  .sparkle,
+  .flame,
+  .mini-cake-flame,
+  .note-card,
+  .cheesecake.is-out .smoke span,
+  .cheesecake.is-out .burst,
+  .cheesecake.is-out .flame {
+    animation: none !important;
+  }
+
+  .journey-button,
+  .tulip-petals,
+  .tulip-bud {
+    transition: none;
+  }
+
+  .cheesecake.is-out .flame {
+    opacity: 0;
+  }
+}

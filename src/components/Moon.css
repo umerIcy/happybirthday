@@ -1,0 +1,46 @@
+.crescent-moon {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation: moon-glow 4.8s ease-in-out infinite;
+}
+
+.moon-body {
+  fill: #fff6d4;
+}
+
+.moon-shade {
+  stroke: rgba(232, 196, 122, 0.55);
+  stroke-width: 2;
+}
+
+.moon-star {
+  fill: #fff;
+}
+
+.moon-star-small {
+  fill: #f6d5e2;
+}
+
+.moon-star-tiny {
+  fill: #f8e7b0;
+}
+
+@keyframes moon-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px rgba(248, 231, 176, 0.55));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 14px rgba(255, 244, 196, 0.95));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crescent-moon {
+    animation: none;
+    filter: drop-shadow(0 0 8px rgba(248, 231, 176, 0.7));
+  }
+}

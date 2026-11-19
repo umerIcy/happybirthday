@@ -1,0 +1,903 @@
+.boxMail {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(145deg, #1d0c10 0%, #0c0507 55%, #160609 100%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+    z-index: 100000000;
+}
+
+.boxMail .crossAll {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 25px;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    color: white;
+    z-index: 999;
+}
+
+.boxMail .crossAll:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+.boxMail .boxMail-container {
+    position: absolute;
+    width: 750px;
+    height: 500px;
+    display: flex;
+    margin: 0;
+    /* Multiplication avoids unsupported calc() division in mobile browsers. */
+    scale: min(1, calc((100vw - 16px) * 0.0013333333), calc((100dvh - 90px) * 0.002));
+    filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.55));
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+}
+
+.boxMail .boxMail-container:hover {
+    transform: rotate(-5deg);
+    filter: drop-shadow(0 0 10px #FF7882);
+}
+
+/* Flip around the page's left edge without shifting it out of the notebook.
+   The cover stays inside the container on desktop and phones. */
+.boxMail .boxMail-container.book-open .card1 {
+    transform: rotateY(-105deg);
+}
+
+@media (hover: hover) {
+    .boxMail .boxMail-container:hover .card1 {
+        transform: rotateY(-105deg);
+    }
+}
+
+.boxMail .boxMail-container .card1,
+.boxMail .boxMail-container .card2 {
+    /* Closed: both pages sit centred. Open: cover flips left in place. */
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    height: 100%;
+    transform: none;
+    border: 1px solid rgba(40, 12, 14, 0.5);
+}
+
+/* --- Card 1 Container Styles --- */
+
+/* --- Card 1 Container Styles (Hello Kitty Theme) --- */
+
+.boxMail .boxMail-container .card1 {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    /* Softened gradient: Light Pink to Alice Blue */
+    background: linear-gradient(135deg, #f9bac8 0%, #ef9bb0 55%, #e98aa4 100%);
+    color: #333;
+    /* Darker text for contrast on light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+    /* Lighter shadow */
+}
+
+.boxMail-container .card1 {
+    z-index: 2;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    /* Maintained transition for a high-quality flip */
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Profile Image (UserImg) - Border changed to a soft pink --- */
+
+.boxMail .boxMail-container .card1 .userImg {
+    position: relative;
+    width: 100px;
+    /* Slightly larger */
+    height: 100px;
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #FFC0CB;
+    /* Hello Kitty Pink border */
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(255, 192, 203, 0.8);
+    /* Pink outer glow */
+    animation: floatImage 4s ease-in-out infinite;
+    z-index: 3;
+}
+
+.boxMail .boxMail-container .card1 .userImg img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Text Styling (h4, h3, new subtitle) - Colors adjusted --- */
+
+.boxMail .boxMail-container .card1 .cover-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    transform: rotate(-2deg);
+    /* Less rotation */
+    z-index: 3;
+    color: #333;
+    /* Dark text */
+}
+
+.boxMail .boxMail-container .card1 .username {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.boxMail .boxMail-container .card1 .cover-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px;
+    /* Bigger and more festive */
+    text-transform: capitalize;
+    width: 100%;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: 4px;
+    margin: 0;
+    /* Hello Kitty style text glow: Hot Pink with White highlight */
+    color: #FF69B4;
+    text-shadow: 0 0 8px rgba(255, 105, 180, 0.8),
+        0 0 15px rgba(255, 255, 255, 0.7);
+    animation: pulseGlowHelloKitty 3s infinite alternate;
+    /* Using NEW keyframe name */
+}
+
+.boxMail .boxMail-container .card1 .cover-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-top: 12px;
+    opacity: 0.9;
+    color: #555;
+}
+
+/* --- New Decoration Sparkle Background (Adjusted Opacity and Angle) --- */
+
+.boxMail .boxMail-container .card1 .card1-decoration-sparkle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    /* More subtle */
+    z-index: 0;
+    background: repeating-linear-gradient(45deg,
+            /* Changed angle */
+            rgba(255, 255, 255, 0.15),
+            rgba(255, 255, 255, 0.15) 8px,
+            transparent 8px,
+            transparent 16px);
+    animation: shimmer 15s linear infinite;
+}
+
+/* --- SVG Decoration Styles (Colors adjusted) --- */
+
+.boxMail .boxMail-container .card1 .deco-shape {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 1;
+    opacity: 0.8;
+    transition: all 0.5s;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}
+
+.boxMail .boxMail-container .card1 .deco-shape.top-right-star {
+    top: 20px;
+    right: 20px;
+    animation: slowSpin 15s linear infinite;
+}
+
+.boxMail .boxMail-container .card1 .deco-shape.top-right-star polygon {
+    fill: rgba(255, 255, 255, 0.7);
+    /* Whiter star */
+}
+
+.boxMail .boxMail-container .card1 .deco-shape.bottom-left-ring {
+    bottom: 30px;
+    left: 20px;
+    animation: rotateOscillate 10s ease-in-out infinite alternate;
+}
+
+.boxMail .boxMail-container .card1 .deco-shape.bottom-left-ring circle:first-child {
+    stroke: rgba(255, 255, 255, 0.8);
+    /* Whiter ring outline */
+}
+
+.boxMail .boxMail-container .card1 .deco-shape.bottom-left-ring circle:last-child {
+    fill: rgba(255, 192, 203, 0.3);
+    /* Light pink inner circle */
+}
+
+/* Hover effect: make the decorations slightly fade when the book is open/hovered */
+.boxMail .boxMail-container:hover .card1 .deco-shape {
+    opacity: 0.5;
+}
+
+/* --- Keyframes (Updated for Hello Kitty) --- */
+
+/* 1. Subtle Floating Image (No Change) */
+@keyframes floatImage {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* 2. Text Glow Pulse (NEW HELLO KITTY GLOW) */
+@keyframes pulseGlowHelloKitty {
+    0% {
+        text-shadow: 0 0 5px #FF69B4, 0 0 10px #FF69B4, 0 0 15px #FFC0CB;
+    }
+
+    100% {
+        text-shadow: 0 0 10px #FF69B4, 0 0 20px #FF69B4, 0 0 30px #FFC0CB;
+    }
+}
+
+/* 3. Background Shimmer (No Change) */
+@keyframes shimmer {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+/* 4. Slow Spin (for the Star) (No Change) */
+@keyframes slowSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 5. Rotate Oscillate (for the Ring) (No Change) */
+@keyframes rotateOscillate {
+    0% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+/* Adding the new Keyframes needed for Hello Kitty images/patterns if you use them */
+@keyframes bounceKitty {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+}
+
+@keyframes patternShift {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 100px 100px;
+    }
+}
+/* =========================================
+   PREMIUM SCRAPBOOK NOTEBOOK COVER
+========================================= */
+
+.boxMail .boxMail-container .card1 {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    color: #713b4c;
+
+    /* Hardcover pink texture */
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(255,255,255,.5), transparent 45%),
+        radial-gradient(ellipse at 80% 85%, rgba(255,255,255,.25), transparent 45%),
+        linear-gradient(145deg, #ffd5df 0%, #f6b8c9 48%, #e99caf 100%);
+
+    border: 1px solid #d9859d;
+    border-right: 4px solid #d47d96;
+
+    box-shadow:
+        inset 5px 0 12px rgba(255,255,255,.45),
+        inset -5px 0 12px rgba(133,48,76,.12),
+        5px 0 15px rgba(0,0,0,.16);
+
+    /* Keep the cover painted after it flips past 90deg; hiding the back
+       made it look like it vanished. */
+    backface-visibility: visible;
+}
+
+/* Plain inside cover shown once the front has flipped open. */
+.boxMail .boxMail-container .card1::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    background: linear-gradient(135deg, #f3adc0 0%, #ffe0e9 100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease 0.2s;
+}
+
+.boxMail .boxMail-container.book-open .card1::after {
+    opacity: 1;
+}
+
+@media (hover: hover) {
+    .boxMail .boxMail-container:hover .card1::after {
+        opacity: 1;
+    }
+}
+
+/* Fine cover texture */
+.boxMail .boxMail-container .card1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .22;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            rgba(255,255,255,.3) 1px,
+            transparent 2px,
+            transparent 5px
+        );
+
+    z-index: 0;
+}
+
+/* Inner decorative border */
+.notebook-inner-border {
+    position: absolute;
+    inset: 15px;
+    border: 1px solid rgba(255,255,255,.65);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(195,100,128,.12);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Notebook spine */
+.notebook-spine {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 100%;
+    z-index: 4;
+
+    background: linear-gradient(
+        90deg,
+        #bd6c86,
+        #e9a0b4 35%,
+        #f7c4d1 75%,
+        #d98aa1
+    );
+
+    border-right: 1px solid rgba(137,55,81,.3);
+    box-shadow: 3px 0 7px rgba(112,42,64,.15);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.notebook-spine span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fce3e9;
+    border: 1px solid #b86c84;
+    box-shadow:
+        inset 1px 1px 2px rgba(0,0,0,.2),
+        0 1px 2px rgba(255,255,255,.6);
+}
+
+/* Cover content */
+.boxMail .boxMail-container .card1 .cover-text-wrapper {
+    position: relative;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    width: 85%;
+    margin: 0 0 18px 12px;
+    transform: rotate(-1deg);
+}
+
+.cover-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #a65d75;
+    margin-bottom: 15px;
+}
+
+.boxMail .boxMail-container .card1 .username {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #754154;
+    margin-bottom: 10px;
+}
+
+.boxMail .boxMail-container .card1 .username .underline {
+    display: block;
+    width: 65%;
+    height: 2px;
+    margin: 7px auto 0;
+    background: #c77791;
+    border-radius: 10px;
+}
+
+.boxMail .boxMail-container .card1 .cover-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 58px;
+    font-weight: 700;
+    text-transform: capitalize;
+    width: 100%;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    margin: 0;
+
+    color: #b94e75;
+    text-shadow: 2px 3px 0 rgba(255,255,255,.65);
+    animation: none;
+}
+
+.boxMail .boxMail-container .card1 .cover-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 12px;
+    color: #89566a;
+    letter-spacing: 1px;
+}
+
+/* Polaroid-style photo */
+.boxMail .boxMail-container .card1 .userImg {
+    position: relative;
+    z-index: 3;
+
+    width: 105px;
+    height: 105px;
+    padding: 6px;
+
+    background: #fffaf9;
+    border-radius: 3px;
+    border: 1px solid #e7c2cb;
+
+    transform: rotate(4deg);
+
+    box-shadow:
+        0 5px 12px rgba(105,39,61,.18),
+        0 1px 3px rgba(0,0,0,.1);
+
+    margin: 0 0 12px 12px;
+}
+
+.boxMail .boxMail-container .card1 .userImg img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 1px;
+}
+
+/* Decorative tape */
+.notebook-tape {
+    position: absolute;
+    top: 25px;
+    right: 45px;
+    width: 75px;
+    height: 22px;
+    z-index: 5;
+
+    background: rgba(255,245,211,.65);
+    transform: rotate(35deg);
+
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+    backdrop-filter: blur(2px);
+}
+
+/* Small handwritten label */
+.notebook-label {
+    position: absolute;
+    bottom: 35px;
+    right: 28px;
+    z-index: 3;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #a85e76;
+    transform: rotate(-4deg);
+}
+
+/* Sparkle texture */
+.boxMail .boxMail-container .card1 .card1-decoration-sparkle {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: .16;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(#fff 1px, transparent 1px);
+
+    background-size: 18px 18px;
+}
+
+/* Decorative shapes */
+.boxMail .boxMail-container .card1 .deco-shape {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    z-index: 2;
+    color: rgba(255,255,255,.8);
+    filter: drop-shadow(0 2px 3px rgba(160,75,100,.15));
+}
+
+.boxMail .boxMail-container .card1 .deco-shape.top-right-star {
+    top: 70px;
+    right: 27px;
+    animation: slowSpin 18s linear infinite;
+}
+
+.boxMail .boxMail-container .card1 .deco-shape.bottom-left-ring {
+    bottom: 65px;
+    left: 30px;
+    width: 30px;
+    height: 30px;
+    animation: rotateOscillate 8s ease-in-out infinite alternate;
+}
+
+.cover-page-number {
+    position: absolute;
+    bottom: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(132,66,88,.65);
+}
+
+
+/* --- Card 2: The Outer Page Wrapper (Clean background/page texture) --- */
+.boxMail .boxMail-container .card2 {
+    position: absolute;
+    top: 0;
+    left: 25%;
+    z-index: 1;
+    width: 50%;
+    height: 100%;
+    transform: none;
+    /* Warm ruled paper so the letter reads like a real notebook page. */
+    background-color: #fff8e8;
+    background-image:
+        linear-gradient(90deg, transparent 0 38px, rgba(178, 73, 79, 0.35) 38px 39px, transparent 39px),
+        repeating-linear-gradient(180deg, transparent 0 31px, rgba(120, 100, 80, 0.18) 31px 32px);
+    border-radius: 3px 10px 10px 3px;
+    transform-style: preserve-3d;
+    transform-origin: left;
+    transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Smoother transition */
+    box-shadow: inset 8px 0 18px rgba(90, 55, 45, 0.16), 0 12px 28px rgba(0, 0, 0, 0.35);
+    /* Subtle shadow near the spine */
+}
+
+/* --- The Inner Pink Box (The lifted note/content) --- */
+.boxMail .boxMail-container .card2 .card2-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: transparent;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    /* High-quality ease-out */
+    overflow: hidden;
+    font-family: "Inter", sans-serif;
+    color: #4a3831;
+    border-radius: 10px;
+    /* Rounded corners for the "floating" element */
+    padding: 25px 26px 25px 52px;
+    /* Generous internal padding, leaving room for the notebook margin */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Lift the inner page when the cover is flipped open (hover or tap). */
+.boxMail .boxMail-container.book-open .card2-content,
+.boxMail .boxMail-container:hover .card2-content {
+    /* Slightly less movement but higher shadow lift */
+    transform: translate(12px, 12px);
+    /* Deep, soft shadow for a clear floating effect */
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.4),
+        -2px -2px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* --- H3: The small heading (e.g., "To You!") --- */
+.boxMail .boxMail-container .card2 h3 {
+    font-family: 'Dancing Script', cursive;
+    /* Cleaned up the confusing padding: centered and top/bottom space */
+    padding: 0 0 10px 0;
+    text-align: center;
+    font-size: 34px;
+    /* Big, friendly heading */
+    margin-bottom: 15px;
+    color: #8b1a2b;
+    text-shadow: none;
+    /* Added a dotted line for separation */
+    border-bottom: 3px dashed rgba(139, 26, 43, 0.35);
+}
+
+/* --- H2: The main message content --- */
+.boxMail .boxMail-container .card2 .card2-message-text {
+    font-family: Inter, system-ui, sans-serif;
+    padding: 10px 0;
+    font-size: 18px;
+    line-height: 1.55;
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: auto;
+    color: #4a3831;
+    text-shadow: none;
+}
+
+.boxMail .boxMail-container .card2 .card2-message-text p {
+    margin: 0 0 0.7em;
+}
+
+.boxMail .boxMail-container .card2 .letter-closing {
+    margin-top: 0.2em;
+    font-family: "Dancing Script", cursive;
+    font-size: 1.35em;
+}
+
+.boxMail .boxMail-container .card2 .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 26px;
+    font-weight: bold;
+    color: #9b1f2d;
+    margin-top: 15px;
+    text-align: right;
+    text-shadow: none;
+}
+
+/* New: Scrollbar for the message (for when it overflows) */
+.boxMail .boxMail-container .card2 .card2-message-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.boxMail .boxMail-container .card2 .card2-message-text::-webkit-scrollbar-thumb {
+    background-color: rgba(139, 26, 43, 0.35);
+    border-radius: 3px;
+}
+
+/* New: Decoration Element (optional subtle texture) */
+.boxMail .boxMail-container .card2 .card2-content .card2-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.1) 1%, transparent 5%),
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.1) 1%, transparent 5%);
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* --- New Decoration Styles --- */
+
+/* Corner Ribbon Effect */
+.boxMail .boxMail-container .card2 .card2-content .corner-ribbon {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.boxMail .boxMail-container .card2 .card2-content .corner-ribbon.top-left {
+    top: 0;
+    left: 0;
+    border-top-color: rgba(139, 26, 43, 0.5);
+    border-left-color: rgba(139, 26, 43, 0.5);
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+
+.boxMail .boxMail-container .card2 .card2-content .corner-ribbon.bottom-right {
+    bottom: 0;
+    right: 0;
+    /* Creates a pink triangle ribbon in the opposite corner */
+    border-bottom-color: rgba(10, 10, 10, 0.2);
+    border-right-color: rgba(10, 10, 10, 0.2);
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+
+/* Subtle Confetti Dots Background Layer */
+.boxMail .boxMail-container .card2 .card2-content .confetti-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.2;
+    background:
+        radial-gradient(circle at 10% 20%, #fff 2px, transparent 0),
+        radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.8) 2px, transparent 0),
+        radial-gradient(circle at 50% 90%, rgba(155, 31, 45, 0.7) 1px, transparent 0),
+        radial-gradient(circle at 30% 60%, rgba(139, 26, 43, 0.4) 1px, transparent 0),
+        radial-gradient(circle at 70% 10%, rgba(155, 31, 45, 0.7) 2px, transparent 0);
+    background-size: 50px 50px;
+    transform: rotate(1deg);
+}
+
+
+
+
+
+@media screen and (max-width: 658px) {
+    .boxMail .boxMail-container {
+        position: absolute;
+        width: 650px;
+        height: 450px;
+        display: flex;
+        margin: 0;
+        /* Explicit phone scale keeps the notebook inside the viewport. */
+        scale: min(0.52, calc((100vw - 20px) * 0.0013333333), calc((100dvh - 100px) * 0.002));
+        transform-origin: center center;
+        -webkit-perspective: 2000px;
+        perspective: 2000px;
+    }
+
+    .boxMail .boxMail-container:hover {
+        transform: rotate(-5deg);
+        filter: drop-shadow(0 0 10px #FF7882);
+    }
+
+    .boxMail .boxMail-container .card2 h3 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    .boxMail .boxMail-container .card2 .card2-message-text {
+        font-family: Inter, system-ui, sans-serif;
+        padding: 10px 2px 8px 0;
+        font-size: 20px;
+        line-height: 1.45;
+        flex-grow: 1;
+        overflow-y: auto;
+        text-shadow: none;
+    }
+
+    .boxMail .boxMail-container.book-open .card2-content,
+    .boxMail .boxMail-container:hover .card2-content {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .boxMail .boxMail-container .card2 .signature {
+        margin-top: 8px;
+        padding-bottom: 4px;
+    }
+
+}
+
+/* --------------------------------------------------------------------------
+   Real-notebook details: binder rings, spine shadow, washi tape and a label.
+   -------------------------------------------------------------------------- */
+
+
+.boxMail .boxMail-container .card1 .notebook-tape {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    z-index: 4;
+    width: 104px;
+    height: 34px;
+    transform: translateX(-50%) rotate(-6deg);
+    background: url('/stickers/tape-3.webp') center / contain no-repeat;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.boxMail .boxMail-container .card1 .notebook-label {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    z-index: 4;
+    transform: translateX(-50%) rotate(-2deg);
+    padding: 5px 14px;
+    border: 1px dashed rgba(120, 40, 55, 0.5);
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.65);
+    color: #8b1a2b;
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
