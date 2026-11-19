@@ -2,10 +2,16 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { GiCrossMark } from 'react-icons/gi'
 import { bigLetter, person } from '../data/siteData'
 import CrescentMoon from './CrescentMoon'
+import { track } from '../trackVisit'
 
 const BookCanvas = ({ active, setActive }) => {
   const dropdownRef = useRef(null)
   const [bookOpen, setBookOpen] = useState(false)
+
+  const toggleBook = () => {
+    if (!bookOpen) track('letter-open')
+    setBookOpen((open) => !open)
+  }
 
   const close = useCallback(() => {
     setBookOpen(false)
@@ -58,11 +64,11 @@ const BookCanvas = ({ active, setActive }) => {
           role="button"
           tabIndex={0}
           aria-label={bookOpen ? 'Close the notebook cover' : 'Open the notebook cover'}
-          onClick={() => setBookOpen((open) => !open)}
+          onClick={toggleBook}
           onKeyDown={(event) => {
             if (event.key === 'Enter' || event.key === ' ') {
               event.preventDefault()
-              setBookOpen((open) => !open)
+              toggleBook()
             }
           }}
         >

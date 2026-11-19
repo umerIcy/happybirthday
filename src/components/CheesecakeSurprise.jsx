@@ -2,6 +2,7 @@ import { useState } from 'react'
 import confetti from 'canvas-confetti'
 import CrescentMoon from './CrescentMoon'
 import { cheesecake, experience } from '../data/siteData'
+import { track } from '../trackVisit'
 
 const CONFETTI_COLORS = ['#cbb4ee', '#f6d5e2', '#f8e7b0', '#ffffff', '#b7d7ae']
 
@@ -10,6 +11,7 @@ const CheesecakeSurprise = ({ onContinue }) => {
 
   const blowOut = () => {
     if (blown) return
+    track('candle-blown')
     setBlown(true)
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches

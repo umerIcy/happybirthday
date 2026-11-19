@@ -5,6 +5,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Layout from './layout/Layout'
 import Home from './pages/Home'
 import OpeningAnimation from './components/OpeningAnimation'
+import { track } from './trackVisit'
 
 // The cake drawing needs a few seconds. These timings let it finish, then move on.
 const OPENING_TIMINGS = {
@@ -27,6 +28,7 @@ const App = () => {
   const timers = useRef([])
 
   const skipOpening = () => {
+    track('opening-skip')
     timers.current.forEach((timer) => window.clearTimeout(timer))
     setAnimateOut(true)
     timers.current = [

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import TulipArt from './TulipArt'
 import CrescentMoon from './CrescentMoon'
 import { experience, tulips } from '../data/siteData'
+import { track } from '../trackVisit'
 
 const TulipGarden = ({ onContinue }) => {
   const [openIds, setOpenIds] = useState([])
@@ -9,6 +10,7 @@ const TulipGarden = ({ onContinue }) => {
   const active = tulips.find((tulip) => tulip.id === activeId)
 
   const openTulip = (id) => {
+    if (!openIds.includes(id)) track(id)
     setOpenIds((current) => (current.includes(id) ? current : [...current, id]))
     setActiveId(id)
   }

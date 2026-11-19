@@ -4,6 +4,7 @@ import SmallLetter from './SmallLetter'
 import TulipArt from './TulipArt'
 import CrescentMoon from './CrescentMoon'
 import { experience } from '../data/siteData'
+import { track } from '../trackVisit'
 
 const LetterMoment = () => {
   const [bookHidden, setBookHidden] = useState(true)
@@ -12,6 +13,7 @@ const LetterMoment = () => {
   useEffect(() => () => window.clearTimeout(openTimer.current), [])
 
   const revealBook = () => {
+    track('envelope-open')
     window.clearTimeout(openTimer.current)
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     openTimer.current = window.setTimeout(() => setBookHidden(false), reduceMotion ? 0 : 700)

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import TulipArt from './TulipArt'
 import CrescentMoon from './CrescentMoon'
 import { experience, moon, person } from '../data/siteData'
+import { track } from '../trackVisit'
 
 const WelcomeScreen = ({ onOpen }) => {
   const [moonOpen, setMoonOpen] = useState(false)
@@ -21,7 +22,10 @@ const WelcomeScreen = ({ onOpen }) => {
         <button
           type="button"
           className={`moon-button ${moonOpen ? 'is-open' : ''}`}
-          onClick={() => setMoonOpen((open) => !open)}
+          onClick={() => {
+            if (!moonOpen) track('moon-open')
+            setMoonOpen((open) => !open)
+          }}
           aria-expanded={moonOpen}
           aria-label={moonOpen ? `Close ${moon.label}'s note` : `${moon.label}. ${moon.hint}`}
         >
